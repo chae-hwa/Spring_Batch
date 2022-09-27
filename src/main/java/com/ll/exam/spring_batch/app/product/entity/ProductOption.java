@@ -31,4 +31,10 @@ public class ProductOption extends BaseEntity {
         this.color = color;
         this.size = size;
     }
+
+    public boolean isOrderable(int quantity) {
+        if (isSoldOut() == false) return true; // 품절이 아니다 (주문 가능)
+
+        return getStockQuantity() >= quantity; // 쇼핑몰 보유 재고가 주문 수량보다 많다 (주문 가능)
+    }
 }

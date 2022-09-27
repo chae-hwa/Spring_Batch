@@ -3,6 +3,7 @@ package com.ll.exam.spring_batch.app.base;
 import com.ll.exam.spring_batch.app.cart.service.CartService;
 import com.ll.exam.spring_batch.app.member.entity.Member;
 import com.ll.exam.spring_batch.app.member.service.MemberService;
+import com.ll.exam.spring_batch.app.order.service.OrderService;
 import com.ll.exam.spring_batch.app.product.entity.Product;
 import com.ll.exam.spring_batch.app.product.entity.ProductOption;
 import com.ll.exam.spring_batch.app.product.service.ProductService;
@@ -18,7 +19,7 @@ import java.util.Arrays;
 public class DevInitData {
 
     @Bean
-    public CommandLineRunner initData(MemberService memberService, ProductService productService, CartService cartService){
+    public CommandLineRunner initData(MemberService memberService, ProductService productService, CartService cartService, OrderService orderService){
         return args ->
         {
             String password = "{noop}1234";
@@ -36,6 +37,8 @@ public class DevInitData {
             cartService.addItem(member1, productOption__RED__44, 1);
             cartService.addItem(member1, productOption__RED__44, 2);
             cartService.addItem(member1, productOption__BLUE__44, 1);
+
+            orderService.createFromCart(member1); // member1의 장바구니에서 얻어오겠다.
         };
     }
 }
