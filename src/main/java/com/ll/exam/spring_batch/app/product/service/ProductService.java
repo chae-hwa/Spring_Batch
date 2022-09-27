@@ -15,10 +15,13 @@ import java.util.List;
 public class ProductService {
     private final ProductRepository productRepository;
 
-    public Product create(String name , int price, int wholesalePrice, String makerShopName, List<ProductOption> options) {
+    public Product create(String name , int salePrice, int wholesalePrice, String makerShopName, List<ProductOption> options) {
+
+        int price = (int)Math.ceil(wholesalePrice * 1.6) / 100 * 100; //소비자가(price) = 도매가 * 1.6
 
         Product product = Product.builder()
                 .name(name)
+                .salePrice(salePrice)
                 .price(price)
                 .wholesalePrice(wholesalePrice)
                 .makerShopName(makerShopName)
