@@ -22,7 +22,8 @@ import static javax.persistence.CascadeType.ALL;
 @ToString(callSuper = true)
 public class Product extends BaseEntity {
 
-    private int price;
+    private int price; // 소매가(판매)
+    private int wholesalePrice; // 도매가(구매)
     private String name;
     private String makerShopName;
     private boolean isSoldOut;
@@ -33,6 +34,7 @@ public class Product extends BaseEntity {
     public void addOption(ProductOption option){
         option.setProduct(this);
         option.setPrice(getPrice());
+        option.setWholesalePrice(getWholesalePrice());
 
         productOptions.add(option);
     }
