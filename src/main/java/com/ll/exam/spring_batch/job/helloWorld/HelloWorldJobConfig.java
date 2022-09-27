@@ -23,7 +23,7 @@ public class HelloWorldJobConfig {
     @Bean
     public Job helloWorldJob(){ //Job 이름은 무조건 해야 된다. (딱 1개)
         return jobBuilderFactory.get("helloWorldJob")
-                .incrementer(new RunIdIncrementer()) // 실행마다 강제로 매번 다른 ID를 파라미터로 부여
+//                .incrementer(new RunIdIncrementer()) // 실행마다 강제로 매번 다른 ID를 파라미터로 부여
                 .start(helloWorldStep1())
                 .next(helloWorldStep2()) // Step 추가
                 .build();
@@ -61,7 +61,7 @@ public class HelloWorldJobConfig {
         return ((contribution, chunkContext) -> {
             System.out.println("헬로 월드 2!!!");
 
-            if( true ){
+            if( false  ){
                 throw new Exception("실패 : 헬로 월드2!!!");
             }
 
