@@ -25,6 +25,7 @@ public class HelloWorldJobConfig {
         return jobBuilderFactory.get("helloWorldJob")
                 .incrementer(new RunIdIncrementer()) // 실행마다 강제로 매번 다른 ID를 파라미터로 부여
                 .start(helloWorldStep1())
+                .next(helloWorldStep2()) // Step 추가
                 .build();
     }
 
@@ -32,15 +33,33 @@ public class HelloWorldJobConfig {
     @JobScope // 해당 Job이 실행될 때 생성
     public Step helloWorldStep1(){
         return stepBuilderFactory.get("helloWorldStep1")
-                .tasklet((helloWorldTasklet()))
+                .tasklet((helloWorldStep1Tasklet()))
                 .build();
     }
 
     @Bean
     @StepScope // 해당 Step이 실행될 때 생성
-    public Tasklet helloWorldTasklet(){
+    public Tasklet helloWorldStep1Tasklet(){
         return ((contribution, chunkContext) -> {
-            System.out.println("헬로 월드!");
+            System.out.println("헬로 월드 1!!!");
+
+            return RepeatStatus.FINISHED;
+        });
+    }
+
+    @Bean
+    @JobScope // 해당 Job이 실행될 때 생성
+    public Step helloWorldStep2(){
+        return stepBuilderFactory.get("helloWorldStep2")
+                .tasklet((helloWorldStep2Tasklet()))
+                .build();
+    }
+
+    @Bean
+    @StepScope // 해당 Step이 실행될 때 생성
+    public Tasklet helloWorldStep2Tasklet(){
+        return ((contribution, chunkContext) -> {
+            System.out.println("헬로 월드 2!!!");
 
             return RepeatStatus.FINISHED;
         });
