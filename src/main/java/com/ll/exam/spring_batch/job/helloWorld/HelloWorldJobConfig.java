@@ -61,6 +61,10 @@ public class HelloWorldJobConfig {
         return ((contribution, chunkContext) -> {
             System.out.println("헬로 월드 2!!!");
 
+            if( true ){
+                throw new Exception("실패 : 헬로 월드2!!!");
+            }
+
             return RepeatStatus.FINISHED;
         });
     }
