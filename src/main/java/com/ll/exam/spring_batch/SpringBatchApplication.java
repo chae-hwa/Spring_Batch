@@ -1,9 +1,11 @@
 package com.ll.exam.spring_batch;
 
+import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
+@EnableBatchProcessing // 설정하지 않으면 배치에 관한 어떠한 작업도 하지 않음.
 public class SpringBatchApplication {
 
     public static void main(String[] args) {
