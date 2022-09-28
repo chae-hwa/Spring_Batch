@@ -39,10 +39,20 @@ public class OrderItem extends BaseEntity {
     private boolean isPaid; // 결제 여부
     public OrderItem(ProductOption productOption, int quantity){
         this.productOption = productOption;
-        this.quantity=quantity;
+        this.quantity = quantity;
         this.price = productOption.getPrice();
-        this.price = productOption.getSalePrice();
-        this.price = productOption.getWholesalePrice();
+        this.salePrice = productOption.getSalePrice();
+        this.wholesalePrice = productOption.getWholesalePrice();
     }
 
+    public int calculatePayPrice() {
+
+        return salePrice * quantity; // 계산금액 = 판매가 * 수량
+    }
+
+    public void setPaymentDone() {
+        this.pgFee = 0; // 캐시 결제 시 수수료 X
+        this.payPrice = calculatePayPrice(); // 결제금액 = 계산금액
+        this.isPaid = true; // 결제 완료
+    }
 }

@@ -17,6 +17,7 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final CashService cashService;
 
+    @Transactional
     public Member join(String username, String password, String email) {
         Member member = Member.builder()
                 .username(username)

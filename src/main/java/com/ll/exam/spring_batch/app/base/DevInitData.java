@@ -3,6 +3,7 @@ package com.ll.exam.spring_batch.app.base;
 import com.ll.exam.spring_batch.app.cart.service.CartService;
 import com.ll.exam.spring_batch.app.member.entity.Member;
 import com.ll.exam.spring_batch.app.member.service.MemberService;
+import com.ll.exam.spring_batch.app.order.entity.Order;
 import com.ll.exam.spring_batch.app.order.service.OrderService;
 import com.ll.exam.spring_batch.app.product.entity.Product;
 import com.ll.exam.spring_batch.app.product.entity.ProductOption;
@@ -33,11 +34,12 @@ public class DevInitData {
             memberService.addCash(member1, 10_000, "충전_무통장입금"); // 1만원 충전
             memberService.addCash(member1, 20_000, "충전_무통장입금"); // 2만원 충전
             memberService.addCash(member1, -5_000, "출금_일반"); // 5천원 사용
+            memberService.addCash(member1, 300_000, "충전_무통장입금"); // 30만원 충전
 
             // 해당 회원이 보유 중인 캐시 금액
             long restCash = memberService.getRestCash(member1);
 
-            log.debug(" member1 restCash : ", restCash);
+            log.debug("member1 restCash : " + restCash);
 
             Product product1 = productService.create("단가라 OPS", 68000, 45000, "청평화 A-1-15", Arrays.asList(new ProductOption("RED", "44"), new ProductOption("RED", "55"), new ProductOption("BLUE", "44"), new ProductOption("BLUE", "55")));
             Product product2 = productService.create("쉬폰 OPS", 72000, 55000,"청평화 A-1-15", Arrays.asList(new ProductOption("BLACK", "44"), new ProductOption("BLACK", "55"), new ProductOption("WHITE", "44"), new ProductOption("WHITE", "55")));
@@ -49,7 +51,10 @@ public class DevInitData {
             cartService.addItem(member1, productOption__RED__44, 2);
             cartService.addItem(member1, productOption__BLUE__44, 1);
 
-            orderService.createFromCart(member1); // member1의 장바구니에서 얻어오겠다.
+            Order order1 = orderService.createFromCart(member1); // member1의 장바구니에서 얻어오겠다.
+
+            int order1PayPrice = order1.calculatePayPrice(); // 주문1의 계산 금액
+            orderService.payByRestCashOnly(order1); // 캐시 결제
         };
     }
 }
