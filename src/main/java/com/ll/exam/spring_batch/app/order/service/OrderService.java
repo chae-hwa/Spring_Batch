@@ -79,4 +79,10 @@ public class OrderService {
         order.setPaymentDone(); // 주문1 결제 완료
         orderRepository.save(order);
     }
+
+    @Transactional
+    public void refund(Order order) {
+        order.setRefundDone();
+        orderRepository.save(order);
+    }
 }

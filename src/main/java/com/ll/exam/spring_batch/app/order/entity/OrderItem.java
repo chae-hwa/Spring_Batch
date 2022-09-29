@@ -55,4 +55,11 @@ public class OrderItem extends BaseEntity {
         this.payPrice = calculatePayPrice(); // 결제금액 = 계산금액
         this.isPaid = true; // 결제 완료
     }
+
+    public void setRefundDone() {
+        if(refundQuantity == quantity ) return; //환불 수량 = 재고 수량
+
+        this.refundQuantity = quantity; // 환불수량 = 결제수량
+        this.refundPrice = payPrice; // 환불금액 = 결제금액
+    }
 }

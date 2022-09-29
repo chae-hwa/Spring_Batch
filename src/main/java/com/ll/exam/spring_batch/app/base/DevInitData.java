@@ -70,6 +70,7 @@ public class DevInitData {
 
             orderService.payByRestCashOnly(order2); // 주문2 캐시로 결제하기
 
+            orderService.refund(order2);
         };
     }
 }
