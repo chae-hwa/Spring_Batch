@@ -82,6 +82,9 @@ public class OrderService {
 
     @Transactional
     public void refund(Order order) {
+        int payPrice = order.getPayPrice();
+        memberService.addCash(order.getMember(),payPrice,"환불_캐시환불");
+
         order.setRefundDone();
         orderRepository.save(order);
     }
