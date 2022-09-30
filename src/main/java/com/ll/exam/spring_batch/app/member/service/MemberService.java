@@ -5,7 +5,6 @@ import com.ll.exam.spring_batch.app.cash.service.CashService;
 import com.ll.exam.spring_batch.app.member.entity.Member;
 import com.ll.exam.spring_batch.app.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.Store;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

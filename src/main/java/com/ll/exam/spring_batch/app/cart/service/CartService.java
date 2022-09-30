@@ -5,7 +5,6 @@ import com.ll.exam.spring_batch.app.cart.repository.CartItemRepository;
 import com.ll.exam.spring_batch.app.member.entity.Member;
 import com.ll.exam.spring_batch.app.product.entity.ProductOption;
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.Store;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
