@@ -48,6 +48,7 @@ public class RebateOrderItem extends BaseEntity {
     private int refundPrice;
     private int refundQuantity;
     private boolean isPaid;
+    private LocalDateTime payDate;
 
     // 상품
     private String productName;
@@ -79,6 +80,7 @@ public class RebateOrderItem extends BaseEntity {
         refundPrice = orderItem.getRefundPrice();
         refundQuantity = orderItem.getRefundQuantity();
         isPaid =orderItem.isPaid();
+        payDate = orderItem.getPayDate();
 
         // 상품
         productName = orderItem.getProductOption().getProduct().getName();
