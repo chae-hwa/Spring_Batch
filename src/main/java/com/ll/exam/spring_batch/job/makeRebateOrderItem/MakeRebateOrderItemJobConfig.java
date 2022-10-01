@@ -71,15 +71,13 @@ public class MakeRebateOrderItemJobConfig {
         return new RepositoryItemReaderBuilder<OrderItem>()
                 .name("orderItemReader")
                 .repository(orderItemRepository) // orderItemRepository에서
-<<<<<<< HEAD
+
                 .methodName("findAllByIdBetween") // findAllByIdLessThan 메서드를 불러와라.
                 .pageSize(100)
                 .arguments(Arrays.asList(fromId, toId)) // 6개씩
-=======
                 .methodName("findAllByIdLessThan") // findAllByIdLessThan 메서드를 불러와라.
                 .pageSize(100)
                 .arguments(Arrays.asList(6L)) // 6개씩
->>>>>>> f8b15097bf2347db915683da253d2dbf3a8f899b
                 .sorts(Collections.singletonMap("id", Sort.Direction.ASC))
                 .build();
     }
