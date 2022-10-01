@@ -46,6 +46,15 @@ public class RebateOrderItem extends BaseEntity {
     private int refundQuantity;
     private boolean isPaid;
 
+    // 상품
+    private String productName;
+
+    // 상품 옵션
+    private String productOptionColor;
+    private String productOptionSize;
+    private String productOptionDisplayColor;
+    private String productOptionDisplaySize;
+
     // RebateOrderItem에 OrderItem 필드를 가져온다.
     public RebateOrderItem(OrderItem orderItem){
         this.orderItem = orderItem;
@@ -60,31 +69,15 @@ public class RebateOrderItem extends BaseEntity {
         refundPrice = orderItem.getRefundPrice();
         refundQuantity = orderItem.getRefundQuantity();
         isPaid =orderItem.isPaid();
-    }
 
-    // RebateOrderItem에 ProductOption 필드를 가져온다.
-    public RebateOrderItem(ProductOption productOption){
-        this.productOption = productOption;
-        this.quantity = quantity;
-        this.price = productOption.getPrice();
-        this.salePrice = productOption.getSalePrice();
-        this.wholesalePrice = productOption.getWholesalePrice();
-    }
+        // 상품
+        productName = orderItem.getProductOption().getProduct().getName();
 
-    public int calculatePrice(){
-        return salePrice * quantity;
-    }
+        // 상품 옵션 추가 데이터
+        productOptionColor = orderItem.getProductOption().getColor();
+        productOptionSize = orderItem.getProductOption().getSize();
+        productOptionDisplayColor = orderItem.getProductOption().getDisplayColor();
+        productOptionDisplaySize = orderItem.getProductOption().getSize();
 
-    public void setPaymentDone(){
-        this.pgFee = 0;
-        this.payPrice = calculatePrice();
-        this.isPaid = true;
-    }
-
-    public void setRefundDone() {
-        if (refundQuantity == quantity) return;
-
-        this.refundQuantity = quantity;
-        this.refundPrice = payPrice;
     }
 }
