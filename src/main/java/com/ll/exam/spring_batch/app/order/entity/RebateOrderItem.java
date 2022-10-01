@@ -11,6 +11,8 @@ import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 
+import java.time.LocalDateTime;
+
 import static javax.persistence.FetchType.LAZY;
 
 @Entity
@@ -35,6 +37,7 @@ public class RebateOrderItem extends BaseEntity {
     @JoinColumn(foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private ProductOption productOption;
 
+    // 가격
     private int quantity;
 
     private int price;
@@ -54,6 +57,9 @@ public class RebateOrderItem extends BaseEntity {
     private String productOptionSize;
     private String productOptionDisplayColor;
     private String productOptionDisplaySize;
+
+    // 주문 품목
+    private LocalDateTime orderItemCreateDate;
 
     // RebateOrderItem에 OrderItem 필드를 가져온다.
     public RebateOrderItem(OrderItem orderItem){
@@ -77,7 +83,9 @@ public class RebateOrderItem extends BaseEntity {
         productOptionColor = orderItem.getProductOption().getColor();
         productOptionSize = orderItem.getProductOption().getSize();
         productOptionDisplayColor = orderItem.getProductOption().getDisplayColor();
-        productOptionDisplaySize = orderItem.getProductOption().getSize();
 
+
+        // 주문 품목 추가 데이터
+        orderItemCreateDate = orderItem.getCreateDate();
     }
 }
