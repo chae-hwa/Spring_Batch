@@ -17,4 +17,5 @@ public interface OrderItemRepository extends JpaRepository<OrderItem, Long> {
     Page<OrderItem> findAllByIdBetween(long fromId, long toId, Pageable pageable);
     // -> 실행쿼리 : SELECT * FROM order_item AS OI WHERE OI.id BETWEEN 2 AND 7;
 
+    Page<OrderItem> findAllByIsPaid (boolean isPaid, Pageable pageable);
 }
